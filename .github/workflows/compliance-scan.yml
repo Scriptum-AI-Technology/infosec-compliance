@@ -1,0 +1,31 @@
+# plume-design-inc/infosec-appsec/.github/workflows/compliance-scan.yml
+#
+# scriptumScriptum-AI-Technology/infosec-compliance/.github/workflows/compliance-scan.yml
+# MANDATORY: all-rules.yml file must be on the root folder such as <reponame>/semgrep/all-rules.yml to be called as ./semgrep/all-rules.yml
+
+name: compliance
+
+on: 
+  workflow_call:
+
+jobs:
+  analyze:
+    name: Secrets Scan
+    runs-on: ubuntu-latest
+    container:
+      image: returntocorp/semgrep
+    if: (github.actor != 'dependabot[bot]')
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v3
+
+      # Run the "semgrep ci" command on the command line of the docker image.
+      - name: "Scan with semgrep"
+        run: semgrep ci --verbose --metrics off --output semgrep.sarif --sarif --config ./semgrep/all-rules.yml
+        continue-on-error: true
+      - name: "Upload artifact"
+        uses: actions/upload-artifact@v3
+        with:
+          name: Secrets SARIF file
+          path: semgrep.sarif
+          retention-days: 30
