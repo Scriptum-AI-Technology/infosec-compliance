@@ -1,5 +1,3 @@
-# plume-design-inc/infosec-appsec/.github/workflows/compliance-scan.yml
-#
 # scriptumScriptum-AI-Technology/infosec-compliance/.github/workflows/compliance-scan.yml
 # MANDATORY: all-rules.yml file must be on the root folder such as <reponame>/semgrep/all-rules.yml to be called as ./semgrep/all-rules.yml
 
