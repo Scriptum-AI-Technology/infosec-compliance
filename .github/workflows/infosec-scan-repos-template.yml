@@ -1,0 +1,14 @@
+name: Infosec Compliance - Semgrep Scans
+
+on:
+  workflow_dispatch:
+  # Scan all files on branches, report any findings.
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  scan:
+    name: Code scan
+    uses: Scriptum-AI-Technology/infosec-compliance/.github/workflows/compliance-scan.yml@main
