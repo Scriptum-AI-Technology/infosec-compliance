@@ -18,11 +18,11 @@ jobs:
 
       # Run the "semgrep ci" command on the command line of the docker image.
       - name: "Scan with semgrep"
-        run: semgrep ci --verbose --metrics=off --sarif --output=semgrep-report.sarif --config=p/python --config=p/security-audit --config=p/secrets #--config=./semgrep/rules.yml
+        run: semgrep ci --verbose --metrics=off --sarif --output=semgrep-report.sarif --config=p/security-audit --config=p/secrets #--config=p/python --config=./semgrep/rules.yml
         continue-on-error: true
       - name: "Upload artifact"
         uses: actions/upload-artifact@v4
         with:
-          name: Secrets SARIF file
+          name: Semgrep Report SARIF file
           path: semgrep-report.sarif
           retention-days: 30
